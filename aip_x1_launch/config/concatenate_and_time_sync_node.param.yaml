@@ -13,9 +13,9 @@
     synchronized_pointcloud_postfix: pointcloud
     input_twist_topic_type: twist
     input_topics: [
-                    "/sensing/lidar/top/pointcloud_before_sync", # unknown timestamp
-                    "/sensing/lidar/front_center/pointcloud_before_sync", # unknown timestamp
+                    "/sensing/lidar/front_center/pointcloud_before_sync", # 0.025
+                    "/sensing/lidar/top/pointcloud_before_sync", # 0.055
                 ]
     output_frame: base_link
-    lidar_timestamp_offsets: [0.0, 0.02] # unknown offset
+    lidar_timestamp_offsets: [0.0, 0.03]
     lidar_timestamp_noise_window: [0.01, 0.01]
