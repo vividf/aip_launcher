@@ -210,10 +210,10 @@
     </group>
 
     <include file="$(find-pkg-share aip_x2_launch)/launch/pointcloud_preprocessor.launch.py">
-      <arg name="base_frame" value="base_link" />
       <arg name="use_intra_process" value="true" />
       <arg name="use_multithread" value="true" />
       <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
+      <arg name="concatenate_and_time_sync_node_param_path" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/aip_x2/concatenate_and_time_sync_node.param.yaml" />
     </include>
 
   </group>

@@ -15,9 +15,8 @@
 
 from copy import deepcopy
 import os
-from typing import Any
-from typing import List
 
+from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -30,15 +29,6 @@ from launch.substitutions import EnvironmentVariable
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import PushRosNamespace
 import yaml
-
-
-def join_list_of_arguments(arguments: List[Any]) -> str:
-    """Join a list of arguments into a string, used by Include Launch Description.
-
-    Example:
-        join_list_of_arguments([1,2,3]) -> "[1, 2, 3]"
-    """
-    return f"[{', '.join([str(arg) for arg in arguments])}]"
 
 
 def generate_launch_dictionary():
@@ -122,7 +112,7 @@ def load_sub_launches_from_yaml(context, *args, **kwargs):
         )
         sub_launch_actions.append(sub_launch_action)
 
-    processor_dict = config["preprocessor"]
+    # processor_dict = config["preprocessor"]
     sub_launch_actions.append(
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -133,18 +123,19 @@ def load_sub_launches_from_yaml(context, *args, **kwargs):
                 )
             ),
             launch_arguments=[
-                ("base_frame", "base_link"),
                 ("use_multithread", "true"),
                 ("use_intra_process", "true"),
                 ("use_pointcloud_container", LaunchConfiguration("use_pointcloud_container")),
                 ("pointcloud_container_name", LaunchConfiguration("pointcloud_container_name")),
-                ("input_topics", join_list_of_arguments(processor_dict["input_topics"])),
-                ("input_offset", join_list_of_arguments(processor_dict["input_offset"])),
-                ("timeout_sec", str(processor_dict["timeout_sec"])),
-                ("input_twist_topic_type", str(processor_dict["input_twist_topic_type"])),
                 (
-                    "publish_synchronized_pointcloud",
-                    str(processor_dict["publish_synchronized_pointcloud"]),
+                    "concatenate_and_time_sync_node_param_path",
+                    os.path.join(
+                        FindPackageShare("individual_params").find(),
+                        "config",
+                        LaunchConfiguration("vehicle_id").perform(None),
+                        "aip_xx1_gen2",
+                        "concatenate_and_time_sync_node.param.yaml",
+                    ),
                 ),
             ],
         )

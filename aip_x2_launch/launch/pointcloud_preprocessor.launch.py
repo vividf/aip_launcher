@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 
-from ament_index_python.packages import get_package_share_directory
 import launch
 from launch.actions import DeclareLaunchArgument
 from launch.actions import OpaqueFunction
@@ -65,20 +63,10 @@ def generate_launch_description():
     def add_launch_arg(name: str, default_value=None):
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
-    aip_x2_launch_share_dir = get_package_share_directory("aip_x2_launch")
-
     add_launch_arg("use_multithread", "True")
     add_launch_arg("use_intra_process", "True")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
-
-    add_launch_arg(
-        "concatenate_and_time_sync_node_param_path",
-        os.path.join(
-            aip_x2_launch_share_dir,
-            "config",
-            "concatenate_and_time_sync_node.param.yaml",
-        ),
-    )
+    add_launch_arg("concatenate_and_time_sync_node_param_path")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
