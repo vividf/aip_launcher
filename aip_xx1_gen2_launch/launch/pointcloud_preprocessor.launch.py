@@ -68,7 +68,6 @@ def generate_launch_description():
     add_launch_arg("individual_container_name", "concatenate_container")
     add_launch_arg("concatenate_and_time_sync_node_param_path")
 
-
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
         "component_container",

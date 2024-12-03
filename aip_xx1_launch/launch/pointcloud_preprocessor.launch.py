@@ -62,7 +62,6 @@ def generate_launch_description():
     def add_launch_arg(name: str, default_value=None):
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
-
     add_launch_arg("use_multithread", "False")
     add_launch_arg("use_intra_process", "False")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
