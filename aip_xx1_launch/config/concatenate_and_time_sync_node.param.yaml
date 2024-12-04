@@ -20,4 +20,4 @@
                 ]
     output_frame: base_link
     lidar_timestamp_offsets: [0.0, 0.02, 0.02, 0.02]
-    lidar_timestamp_noise_window: [0.01, 0.01, 0.01, 0.01]
+    lidar_timestamp_noise_window: [0.02, 0.02, 0.02, 0.02]
