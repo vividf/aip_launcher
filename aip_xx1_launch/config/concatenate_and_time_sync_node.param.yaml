@@ -1,7 +1,5 @@
 /**:
   ros__parameters:
-    # ignore the lidar_timestamp_offsets and lidar_timestamp_noise_window if 'use_naive_approach' is true
-    use_naive_approach: false
     debug_mode: false
     has_static_tf_only: false
     rosbag_length: 10.0
@@ -20,5 +18,7 @@
                     "/sensing/lidar/rear/pointcloud_before_sync",
                 ]
     output_frame: base_link
-    lidar_timestamp_offsets: [0.0, 0.02, 0.02, 0.02]
-    lidar_timestamp_noise_window: [0.02, 0.02, 0.02, 0.02]
+    matching_strategy:
+      type: advanced
+      lidar_timestamp_offsets: [0.0, 0.02, 0.02, 0.02]
+      lidar_timestamp_noise_window: [0.02, 0.02, 0.02, 0.02]
